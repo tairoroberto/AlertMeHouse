@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AlertMeHouse</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="about">About</string>
+    <string name="devices_not_found">Devices not found</string>
+</resources>
