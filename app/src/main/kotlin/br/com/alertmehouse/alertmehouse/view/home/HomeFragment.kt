@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
             message = "Dispositivo: ${alarmDevice?.name} \n" +
                     if (alarmDevice?.status == true) "Habilitado" else " Desabilitado"
             okButton {}
-        }
+        }.show()
     }
 
     private fun setAnimation() {
