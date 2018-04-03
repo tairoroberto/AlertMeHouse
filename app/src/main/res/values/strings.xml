@@ -6,4 +6,6 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="about">About</string>
     <string name="devices_not_found">Devices not found</string>
+    <string name="enabled">Habilitado</string>
+    <string name="disabled">Desabilitado</string>
 </resources>

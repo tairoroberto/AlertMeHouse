@@ -1,5 +1,6 @@
 package br.com.alertmehouse.alertmehouse.view.home
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,7 @@ import br.com.alertmehouse.alertmehouse.R
 import br.com.alertmehouse.alertmehouse.model.AlarmDevice
 
 class HomeRecyclerAdapter(private var list: MutableList<AlarmDevice>,
-                          private val onClick: (alarmDevice: AlarmDevice) -> Unit) : RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
+                          private val onClick: (position: Int) -> Unit) : RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
 
     private var lastPosition = -1
 
@@ -21,7 +22,7 @@ class HomeRecyclerAdapter(private var list: MutableList<AlarmDevice>,
         val item = list[position]
         holder.bind(item)
         holder.itemView.setOnClickListener({
-            onClick(item)
+            onClick(position)
         })
         setAnimation(holder.itemView, position)
     }
@@ -42,15 +43,18 @@ class HomeRecyclerAdapter(private var list: MutableList<AlarmDevice>,
     override fun getItemCount(): Int = list.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.imageViewLogo)
         private val textViewNameDevice: TextView = view.findViewById(R.id.textViewNameDevice)
-        private val switchDevice: Switch = view.findViewById(R.id.switchDevice)
+        private val switchDevice: TextView = view.findViewById(R.id.switchDevice)
 
         fun bind(alarmDevice: AlarmDevice) {
             textViewNameDevice.text = alarmDevice.name
-            switchDevice.isChecked = alarmDevice.status
-
-            alarmDevice.status = switchDevice.isChecked
+            if (alarmDevice.status) {
+                switchDevice.text = switchDevice.context.getString(R.string.enabled)
+                switchDevice.setTextColor(ContextCompat.getColor(switchDevice.context, R.color.enable))
+            } else {
+                switchDevice.text = switchDevice.context.getString(R.string.disabled)
+                switchDevice.setTextColor(ContextCompat.getColor(switchDevice.context, R.color.primary))
+            }
         }
     }
 

@@ -21,8 +21,8 @@ import br.com.alertmehouse.alertmehouse.viewmodel.home.HomeViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.okButton
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 /**
@@ -101,7 +101,7 @@ class HomeFragment : Fragment() {
         activity?.alert {
             title = "Atenção"
             message = "Dispositivo: ${alarmDevice?.name} \n" +
-                      if (alarmDevice?.status == true) "Habilitado" else " Desabilitado"
+                    if (alarmDevice?.status == true) "Habilitado" else " Desabilitado"
             okButton {}
         }
     }
@@ -136,7 +136,15 @@ class HomeFragment : Fragment() {
         showProgress(false)
     }
 
-    private fun onItemClick(alarmDevice: AlarmDevice) {
-        viewModel.setAlarmDevice(alarmDevice)
+    private fun onItemClick(position: Int) {
+        activity?.alert {
+            title = "Atenção"
+            message = "Deseja desabilitar este alarme?"
+            cancelButton {}
+            okButton {
+                list[position].status = false
+                viewModel.setAlarmDevice(list[position])
+            }
+        }
     }
 }
