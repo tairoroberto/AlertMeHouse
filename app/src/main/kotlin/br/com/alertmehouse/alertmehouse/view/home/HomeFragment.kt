@@ -145,6 +145,6 @@ class HomeFragment : Fragment() {
                 list[position].status = false
                 viewModel.setAlarmDevice(list[position])
             }
-        }
+        }?.show()
     }
 }
