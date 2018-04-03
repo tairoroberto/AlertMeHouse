@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
  * Created by tairo on 11/12/17.
  */
 class RemoteApiService {
-    private val URL_BASE = "https://us-central1-remoteok-dfc72.cloudfunctions.net/"
+    private val URL_BASE = "https://us-central1-fiapmob-50e3b.cloudfunctions.net/"
     private var retrofit: Retrofit
 
     init {

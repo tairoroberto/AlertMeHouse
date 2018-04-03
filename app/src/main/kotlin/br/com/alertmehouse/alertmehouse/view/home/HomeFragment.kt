@@ -5,26 +5,24 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.transition.ChangeBounds
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.ImageView
+import android.view.ViewGroup
 import br.com.alertmehouse.alertmehouse.R
 import br.com.alertmehouse.alertmehouse.model.AlarmDevice
 import br.com.alertmehouse.alertmehouse.utils.extension.showProgress
 import br.com.alertmehouse.alertmehouse.utils.extension.showSnackBarError
 import br.com.alertmehouse.alertmehouse.viewmodel.home.HomeViewModel
 import br.com.alertmehouse.alertmehouse.viewmodel.home.HomeViewModelFactory
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.remoteok.io.app.view.home.SearchAdapter
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.experimental.Job
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 import org.jetbrains.anko.toast
-import org.jetbrains.anko.yesButton
 import javax.inject.Inject
 
 /**
@@ -39,17 +37,9 @@ class HomeFragment : Fragment() {
         ViewModelProviders.of(this, homeViewModelFactory).get(HomeViewModel::class.java)
     }
 
-    private val list: MutableList<Job> = ArrayList()
+    private val list: MutableList<AlarmDevice> = ArrayList()
 
     private lateinit var adapter: HomeRecyclerAdapter
-
-    private lateinit var adapterSearch: SearchAdapter
-
-    private val suggestions: MutableList<String> = ArrayList()
-
-    private val filteredValues = ArrayList<String>()
-
-    private lateinit var tracker: FirebaseAnalytics
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
@@ -58,16 +48,15 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = HomeRecyclerAdapter(activity, list, this::onItemClick)
+        adapter = HomeRecyclerAdapter(list, this::onItemClick)
         setHasOptionsMenu(true)
         retainInstance = true
 
         observeLoadingStatus()
-        //observeErrorStatus()
+        observeErrorStatus()
         observeResponse()
+        observeAlarmDeviceResponse()
         getAllDevices()
-
-        tracker = FirebaseAnalytics.getInstance(activity)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -77,13 +66,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setRecyclerViewListJobs()
-
+        setRecyclerViewListDevices()
     }
 
-    private fun setRecyclerViewListJobs() {
-        val layoutManager = LinearLayoutManager(activity)
+    private fun setRecyclerViewListDevices() {
+        val layoutManager = GridLayoutManager(activity, 2)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
@@ -91,7 +78,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getAllDevices() {
-        viewModel.getDevices()
+        viewModel.getAlarmDevices()
     }
 
     private fun observeLoadingStatus() {
@@ -104,6 +91,19 @@ class HomeFragment : Fragment() {
 
     private fun observeResponse() {
         viewModel.getResponse().observe(this, android.arch.lifecycle.Observer { response -> showDevicesList(response) })
+    }
+
+    private fun observeAlarmDeviceResponse() {
+        viewModel.getAlarmDeviceReponse().observe(this, android.arch.lifecycle.Observer { response -> showDevicesChanged(response) })
+    }
+
+    private fun showDevicesChanged(alarmDevice: AlarmDevice?) {
+        activity?.alert {
+            title = "Atenção"
+            message = "Dispositivo: ${alarmDevice?.name} \n" +
+                      if (alarmDevice?.status == true) "Habilitado" else " Desabilitado"
+            okButton {}
+        }
     }
 
     private fun setAnimation() {
@@ -124,37 +124,19 @@ class HomeFragment : Fragment() {
         swipeRefreshLayout?.isRefreshing = false
     }
 
-    private fun showDevicesList(jobs: List<AlarmDevice>?) {
+    private fun showDevicesList(alarmDevices: List<AlarmDevice>?) {
 
         withoutData?.visibility = GONE
-        if (jobs == null || jobs.isEmpty()) {
+        if (alarmDevices == null || alarmDevices.isEmpty()) {
             withoutData?.visibility = VISIBLE
         }
 
-        adapter.update(jobs)
+        adapter.update(alarmDevices)
         swipeRefreshLayout?.isRefreshing = false
         showProgress(false)
     }
 
-    private fun onItemClick(job: Job, imageView: ImageView) {
-
-        activity?.toast("Teste alert")
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.about) {
-            //activity?.browse("https://www.paypal.com/your_paypal")
-            activity?.alert {
-                title = "About"
-                message = "About Message"
-                yesButton { }
-            }?.show()
-        }
-        return true
+    private fun onItemClick(alarmDevice: AlarmDevice) {
+        viewModel.setAlarmDevice(alarmDevice)
     }
 }

@@ -19,21 +19,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:scaleType="centerCrop"
-        android:visibility="visible" />
-
-    <ProgressBar
-        android:id="@+id/progressImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:visibility="gone" />
+        android:visibility="visible"
+        app:srcCompat="@drawable/ic_alert" />
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/textViewNameDevice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -45,66 +35,21 @@
         android:textColor="#252220"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:text="Senior Full Stack Web Developer" />
+        tools:text="Sensor da porta" />
 
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="match_parent"
+    <Switch
+        android:id="@+id/switchDevice"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:checked="true"
         android:ellipsize="end"
         android:fontFamily="@font/sf_ui_text_light"
         android:maxLines="4"
-        android:textAlignment="viewStart"
-        android:textColor="#605751"
-        android:textSize="@dimen/dimen_12sp"
-        tools:text="Tenth Avenue CommerceTenth Avenue CommerceTenth Avenue Commerce" />
+        android:textAlignment="viewStart" />
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/buttonsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:flexDirection="row"
-        app:flexWrap="wrap"
-        app:justifyContent="flex_start">
-
-        <Button
-            android:id="@+id/tag1"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_marginEnd="@dimen/dimen_4dp"
-            android:background="@drawable/border_button"
-            android:fontFamily="@font/sf_ui_text_light"
-            android:textColor="@color/colorAccent"
-            app:layout_flexGrow="1"
-            tools:text="Dev" />
-
-        <Button
-            android:id="@+id/tag2"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_marginEnd="@dimen/dimen_4dp"
-            android:background="@drawable/border_button"
-            android:fontFamily="@font/sf_ui_text_light"
-            android:textColor="@color/colorAccent"
-            app:layout_flexGrow="1"
-            tools:text="marketing" />
-
-        <Button
-            android:id="@+id/tag3"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:background="@drawable/border_button"
-            android:fontFamily="@font/sf_ui_text_light"
-            android:textColor="@color/colorAccent"
-            app:layout_flexGrow="1"
-            tools:text="full " />
-    </com.google.android.flexbox.FlexboxLayout>
 
 </LinearLayout>

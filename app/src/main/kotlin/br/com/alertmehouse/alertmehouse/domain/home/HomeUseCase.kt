@@ -1,8 +1,7 @@
 package br.com.alertmehouse.alertmehouse.domain.home
 
+import br.com.alertmehouse.alertmehouse.model.AlarmDevice
 import br.com.alertmehouse.alertmehouse.model.AlarmDevicesResponse
-import br.com.alertmehouse.alertmehouse.model.AlarmStatus
-import br.com.alertmehouse.alertmehouse.model.AlarmStatusResponse
 import io.reactivex.Single
 
 /**
@@ -10,8 +9,8 @@ import io.reactivex.Single
  */
 class HomeUseCase(private val homeRemoteRepository: HomeRemoteRepository) {
 
-    fun setAlarmeStatus(alarmStatus: AlarmStatus): Single<AlarmStatusResponse> {
-        return homeRemoteRepository.setAlarmeStatus(alarmStatus)
+    fun setAlarmeStatus(alarmDevice: AlarmDevice): Single<AlarmDevice> {
+        return homeRemoteRepository.setAlarmeStatus(alarmDevice)
     }
 
     fun getAlarmDevices(): Single<AlarmDevicesResponse> {

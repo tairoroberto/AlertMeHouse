@@ -2,6 +2,7 @@ package br.com.alertmehouse.alertmehouse.viewmodel.home
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import br.com.alertmehouse.alertmehouse.domain.home.HomeUseCase
 import br.com.alertmehouse.alertmehouse.model.AlarmDevice
 import br.com.alertmehouse.alertmehouse.model.AlarmDevicesResponse
@@ -14,11 +15,9 @@ import io.reactivex.schedulers.Schedulers
 class HomeViewModel(private val homeUseCase: HomeUseCase) : ViewModel() {
 
     private val disposables = CompositeDisposable()
-
     private val response: MutableLiveData<List<AlarmDevice>> = MutableLiveData()
-
+    private val alarmDeviceReponse: MutableLiveData<AlarmDevice> = MutableLiveData()
     private val loadingStatus = MutableLiveData<Boolean>()
-
     private val errorStatus = MutableLiveData<String>()
 
     fun getLoadingStatus(): MutableLiveData<Boolean> {
@@ -33,20 +32,38 @@ class HomeViewModel(private val homeUseCase: HomeUseCase) : ViewModel() {
         return response
     }
 
-    fun getDevices() {
-        getAlarmDevices(homeUseCase.getAlarmDevices())
+    fun getAlarmDeviceReponse(): MutableLiveData<AlarmDevice> {
+        return alarmDeviceReponse
     }
 
-    private fun getAlarmDevices(alarmDevicesResponse: Single<AlarmDevicesResponse>) {
-        disposables.add(alarmDevicesResponse
+    fun getAlarmDevices() {
+        disposables.add(homeUseCase.getAlarmDevices()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe({ loadingStatus.setValue(true) })
                 .doAfterTerminate({ loadingStatus.setValue(false) })
                 .doOnError { throwable -> errorStatus.value = throwable.message.toString() }
                 .subscribe(
-                        { alarmDevices ->
-                            response.value = alarmDevices.devices
+                        { alarmDevicesResponse ->
+                            response.value = alarmDevicesResponse.devices
+                        },
+                        { throwable ->
+                            errorStatus.value = throwable.message.toString()
+                        }
+                )
+        )
+    }
+
+    fun setAlarmDevice(alarmDevice: AlarmDevice) {
+        disposables.add(homeUseCase.setAlarmeStatus(alarmDevice)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe({ loadingStatus.setValue(true) })
+                .doAfterTerminate({ loadingStatus.setValue(false) })
+                .doOnError { throwable -> errorStatus.value = throwable.message.toString() }
+                .subscribe(
+                        { response ->
+                            alarmDeviceReponse.value = response
                         },
                         { throwable ->
                             errorStatus.value = throwable.message.toString()

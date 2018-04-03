@@ -8,7 +8,7 @@ import android.media.RingtoneManager
 import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
-import br.com.alertmehouse.alertmehouse.LoginActivity
+import br.com.alertmehouse.alertmehouse.MainActivity
 import br.com.alertmehouse.alertmehouse.R
 
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -32,12 +32,12 @@ class CustomFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun showNotification(title: String?, body: String?) {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
 
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
-        val builder = NotificationCompat.Builder(this, "android")
+        val builder = NotificationCompat.Builder(this, "alert")
                 .setContentTitle(title)
                 .setContentText(body)
                 .setColor(ContextCompat.getColor(this, R.color.accent))

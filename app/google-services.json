@@ -1,0 +1,174 @@
+{
+  "project_info": {
+    "project_number": "270105853721",
+    "firebase_url": "https://fiapmob-50e3b.firebaseio.com",
+    "project_id": "fiapmob-50e3b",
+    "storage_bucket": "fiapmob-50e3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270105853721:android:27cf9cb88b9bf20d",
+        "android_client_info": {
+          "package_name": "br.com.alertmehouse.alertmehouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270105853721-r3dioss9q8rfj16sl8sm9jubu6nrdan9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.alertmehouse.alertmehouse",
+            "certificate_hash": "bd2fa6e970c86df58923fe875459f78fd512294f"
+          }
+        },
+        {
+          "client_id": "270105853721-9ckpcg7lk74n514jkn1tf12ueaa6gkr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlinrBhmffg1vKzECRHCKzx_MXu62LgRE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270105853721-9ckpcg7lk74n514jkn1tf12ueaa6gkr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270105853721:android:77f22b89b34b2636",
+        "android_client_info": {
+          "package_name": "com.alextavella.donateapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270105853721-crmrlab45anudqf2qsg6dcfrv6vh7kh9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alextavella.donateapp",
+            "certificate_hash": "0ff9f332972c2e335959319d3b606c46599061a9"
+          }
+        },
+        {
+          "client_id": "270105853721-9ckpcg7lk74n514jkn1tf12ueaa6gkr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlinrBhmffg1vKzECRHCKzx_MXu62LgRE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270105853721-9ckpcg7lk74n514jkn1tf12ueaa6gkr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270105853721:android:caae936359ed8da1",
+        "android_client_info": {
+          "package_name": "com.alextavella.fiap_android_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270105853721-j22kvrgrvnh0t5jajerfg2gamf1cn4q7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alextavella.fiap_android_firebase",
+            "certificate_hash": "0ff9f332972c2e335959319d3b606c46599061a9"
+          }
+        },
+        {
+          "client_id": "270105853721-9ckpcg7lk74n514jkn1tf12ueaa6gkr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlinrBhmffg1vKzECRHCKzx_MXu62LgRE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270105853721-9ckpcg7lk74n514jkn1tf12ueaa6gkr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270105853721:android:e64f6e91feaf946e",
+        "android_client_info": {
+          "package_name": "com.alextavella.firebasedemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270105853721-9ckpcg7lk74n514jkn1tf12ueaa6gkr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlinrBhmffg1vKzECRHCKzx_MXu62LgRE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
