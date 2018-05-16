@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.transition.ChangeBounds
@@ -20,9 +21,7 @@ import br.com.alertmehouse.alertmehouse.viewmodel.home.HomeViewModel
 import br.com.alertmehouse.alertmehouse.viewmodel.home.HomeViewModelFactory
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.cancelButton
-import org.jetbrains.anko.okButton
+import org.jetbrains.anko.*
 import javax.inject.Inject
 
 /**
@@ -98,12 +97,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun showDevicesChanged(alarmDevice: AlarmDevice?) {
-        activity?.alert {
-            title = "Atenção"
-            message = "Dispositivo: ${alarmDevice?.name} \n" +
-                    if (alarmDevice?.status == true) "Habilitado" else " Desabilitado"
-            okButton {}
-        }.show()
+        Snackbar.make(recyclerView, "Dispositivo: ${alarmDevice?.name} \n" + if (alarmDevice?.status == true) "Habilitado" else "Desabilitado", Snackbar.LENGTH_LONG).show()
+        getAllDevices()
     }
 
     private fun setAnimation() {
@@ -139,10 +134,10 @@ class HomeFragment : Fragment() {
     private fun onItemClick(position: Int) {
         activity?.alert {
             title = "Atenção"
-            message = "Deseja desabilitar este alarme?"
+            message = "Deseja " + if (list[position]?.status == false) {"habilitar"} else {"desabilitar"} + " o alarme ${list[position]?.name}?"
             cancelButton {}
             okButton {
-                list[position].status = false
+                list[position].status = !list[position].status
                 viewModel.setAlarmDevice(list[position])
             }
         }?.show()
