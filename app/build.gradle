@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+
 android {
 
     compileSdkVersion rootProject.compileSdkVersion
@@ -156,3 +157,6 @@ dependencies {
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
     })
 }
+
+
+apply plugin: 'com.google.gms.google-services'
